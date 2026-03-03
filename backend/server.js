@@ -17,7 +17,7 @@ app.use(cors());
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ limit: '50mb', extended: true }));
 
-// Conexão com banco de dados
+// Conexão com banco
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
 });
@@ -28,6 +28,10 @@ const projectRoutes = require('./src/routes/projects');
 const aiRoutes = require('./src/routes/ai');
 const templateRoutes = require('./src/routes/templates');
 const deployRoutes = require('./src/routes/deploy');
+const startupRoutes = require('./src/routes/startup');
+
+// NOVA ROTA DO ORCHESTRATOR
+const orchestratorRoutes = require('./src/routes/orchestrator');
 
 // Middleware de autenticação
 const authenticateToken = (req, res, next) => {
@@ -55,11 +59,15 @@ const authenticateToken = (req, res, next) => {
 // Rotas públicas
 app.use('/api/auth', authRoutes);
 
-// Rotas protegidas
+// Rotas protegidas (por enquanto abertas para teste)
 app.use('/api/projects', projectRoutes);
 app.use('/api/ai', aiRoutes);
 app.use('/api/templates', templateRoutes);
 app.use('/api/deploy', deployRoutes);
+app.use('/api/startup', startupRoutes);
+
+// ROTA DO ORCHESTRATOR
+app.use('/api/orchestrator', orchestratorRoutes);
 
 // Health check
 app.get('/health', (req, res) => {
@@ -70,7 +78,7 @@ app.get('/health', (req, res) => {
 
 });
 
-// Tratamento de erros global
+// Tratamento global de erros
 app.use((err, req, res, next) => {
 
   console.error(err.stack);
@@ -91,4 +99,3 @@ app.listen(PORT, () => {
 });
 
 module.exports = app;
-
