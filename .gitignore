@@ -1,0 +1,42 @@
+xcopy /E /I /Y C:\ASF_BACKUP\backend backend
+xcopy /E /I /Y C:\ASF_BACKUP\frontend-src frontend\src
+xcopy /E /I /Y C:\ASF_BACKUP\ai-engine ai-engine
+xcopy /E /I /Y C:\ASF_BACKUP\startup-builder startup-builder
+xcopy /E /I /Y C:\ASF_BACKUP\database database
+xcopy /E /I /Y C:\ASF_BACKUP\docs docs
+xcopy /E /I /Y C:\ASF_BACKUP\services services
+xcopy /E /I /Y C:\ASF_BACKUP\templates templates
+copy C:\ASF_BACKUP\.gitignore .gitignore
+# Node
+node_modules/
+
+# Next.js
+.next/
+out/
+
+# Env
+.env
+.env.*
+
+# Logs
+*.log
+
+# Build
+dist/
+build/
+
+# Turbopack
+.turbo/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Generated SaaS output (never commit)
+templates/generated/
+templates/generated/**/node_modules/
+templates/generated/**/.next/
+templates/generated/**/.turbo/
+templates/generated/**/out/
+templates/generated/**/dist/
+templates/generated/**/build/
